@@ -9,7 +9,7 @@ package gyak2;
  *
  * @author :)
  */
-public class Rendezveny {
+public class Rendezveny implements Comparable<Rendezveny>{
     
     private String cim;
     private String idoPont;
@@ -23,10 +23,17 @@ public class Rendezveny {
         this.jegyAr = jegyAr;
     }
     
+    /**
+     * Résztvevő részt vesz 
+     * 
+     * @param resztvevo 
+     */
     public void resztVesz(Resztvevo resztvevo){
-        if(resztvevo.belep(this)){
+        if(resztvevo.belephet(this)){
+            resztvevo.fizet(resztvevo.reszveteliDij(this));
+            resztvevo.resztVesz(this);
             resztvevokSzama++;
-            bevetel += jegyAr;
+            bevetel += resztvevo.reszveteliDij(this);
         }
     }
 
@@ -62,4 +69,9 @@ public class Rendezveny {
     public void setJegyAr(int jegyAr) {
         this.jegyAr = jegyAr;
     }    
+
+    @Override
+    public int compareTo(Rendezveny o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
